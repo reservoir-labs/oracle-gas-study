@@ -41,6 +41,5 @@ contract OracleGas is Test {
 
     function testReadChainlink() external view {
         (, int256 lAnswer,,,) = _avaxUsdChainlinkPricefeed.latestRoundData();
-        console.logInt(lAnswer);
     }
 }
