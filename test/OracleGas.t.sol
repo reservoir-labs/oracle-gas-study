@@ -3,13 +3,14 @@ pragma solidity ^0.8.13;
 
 import {Test, console} from "forge-std/Test.sol";
 import {ReservoirPair, Observation, LogCompression} from "amm-core/src/ReservoirPair.sol";
+import {AggregatorV3Interface} from "chainlink/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
 
 contract OracleGas is Test {
 
     // addresses of actual deployed contracts on the AVAX mainnet
     ReservoirPair internal _stablePair = ReservoirPair(0x146D00567Cef404c1c0aAF1dfD2abEa9F260B8C7);
     address internal _oracleCaller = 0x00A4784E29dB2B1d5e061b4F12aC635Bb910f237;
-    address internal _avaxUsdChainlinkPricefeed = 0x0A77230d17318075983913bC2145DB16C7366156;
+    AggregatorV3Interface internal _avaxUsdChainlinkPricefeed = AggregatorV3Interface(0x0A77230d17318075983913bC2145DB16C7366156);
 
     function setUp() public {
         vm.createSelectFork(getChain("avalanche").rpcUrl);
@@ -39,6 +40,7 @@ contract OracleGas is Test {
     }
 
     function testReadChainlink() external view {
-
+        (, int256 lAnswer,,,) = _avaxUsdChainlinkPricefeed.latestRoundData();
+        console.logInt(lAnswer);
     }
 }
