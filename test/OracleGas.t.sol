@@ -2,7 +2,6 @@
 pragma solidity ^0.8.13;
 
 import {Test, console} from "forge-std/Test.sol";
-import {Counter} from "../src/Counter.sol";
 import {ReservoirPair} from "amm-core/src/ReservoirPair.sol";
 
 contract OracleGas is Test {
