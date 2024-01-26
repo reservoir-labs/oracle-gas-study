@@ -6,8 +6,10 @@ import {ReservoirPair, Observation, LogCompression} from "amm-core/src/Reservoir
 
 contract OracleGas is Test {
 
+    // addresses of actual deployed contracts on the AVAX mainnet
     ReservoirPair internal _stablePair = ReservoirPair(0x146D00567Cef404c1c0aAF1dfD2abEa9F260B8C7);
     address internal _oracleCaller = 0x00A4784E29dB2B1d5e061b4F12aC635Bb910f237;
+    address internal _avaxUsdChainlinkPricefeed = 0x0A77230d17318075983913bC2145DB16C7366156;
 
     function setUp() public {
         vm.createSelectFork(getChain("avalanche").rpcUrl);
@@ -34,5 +36,9 @@ contract OracleGas is Test {
         uint256 lTimeDiff = lNext.timestamp - lPrev.timestamp;
 
         uint256 lAvgPrice = LogCompression.fromLowResLog(lPriceAccDiff / int256(lTimeDiff));
+    }
+
+    function testReadChainlink() external view {
+
     }
 }
