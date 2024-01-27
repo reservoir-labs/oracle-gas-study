@@ -24,11 +24,11 @@ contract OracleGas is Test {
     }
 
     function testRead16Times() public view returns (Observation memory rPrev, Observation memory rNext) {
-        for (uint index = 0; index < 14; ++index) {
+        for (uint index = 5; index < 18; ++index) {
             _stablePair.observation(index);
         }
-        rPrev = _stablePair.observation(14);
-        rNext = _stablePair.observation(15);
+        rPrev = _stablePair.observation(18);
+        rNext = _stablePair.observation(19);
     }
 
     function testRead16Times_WithCalculation() external view {
